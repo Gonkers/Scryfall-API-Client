@@ -1,0 +1,15 @@
+﻿@page
+@model IndexModel
+@{
+  ViewData["Title"] = "Home";
+}
+
+<h2>@ViewData["Title"]</h2>
+<h3>Random Card: <a href="@Model.RandomCard.ScryfallUri">@Model.RandomCard.Name</a></h3>
+<div class="row">
+  <div class="col-md-12">
+    <a href="@Model.RandomCard.ScryfallUri">
+      <img src="@Model.RandomCard.ImageUris["normal"]" style="max-width: 320px;" />
+    </a>
+  </div>
+</div>
