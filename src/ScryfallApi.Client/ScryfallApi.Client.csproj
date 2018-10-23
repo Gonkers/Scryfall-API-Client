@@ -9,6 +9,7 @@
     <Description>.NET client library for accessing the scryfall.com API</Description>
     <PackageProjectUrl>https://github.com/Gonkers/Scryfall-API-Client</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Gonkers/Scryfall-API-Client.git</RepositoryUrl>
+	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageTags>scryfall scryfall-api</PackageTags>
   </PropertyGroup>
 
