@@ -14,8 +14,7 @@ namespace ScryfallApi.Client.Apis
         public async Task<ResultList<Card>> Get(int page) => await GetAsync<ResultList<Card>>($"/cards?page={page}");
         public async Task<Card> GetRandom() => await GetAsync<Card>($"/cards/random", false);
 
-
-
-        public Task<ResultList<Card>> Search(string query, int page, CardSort sort) => throw new NotImplementedException();
+        //TODO : Add more search options, 
+        public async Task<ResultList<Card>> Search(string query, int page, CardSort sort = CardSort.Cmc) => await GetAsync<ResultList<Card>>($"/cards/search?q={query}&page={page}&order={sort.ToString().ToLowerInvariant()}");
     }
 }
