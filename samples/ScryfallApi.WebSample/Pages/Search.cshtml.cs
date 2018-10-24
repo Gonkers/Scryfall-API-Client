@@ -30,7 +30,7 @@ namespace ScryfallApi.WebSample.Pages
 
         public async Task<ActionResult> OnPostAsync()
         {
-            Results = await _scryfallApi.Cards.Search(Query, 1, CardSort.Name);
+            Results = await _scryfallApi.Cards.Search(Query, 1, CardSort.Cmc );
 
             return Page();
         }

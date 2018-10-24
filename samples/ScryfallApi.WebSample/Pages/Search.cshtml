@@ -24,11 +24,20 @@
         <h3>Result: <a href="@card.ScryfallUri">@card.Name</a></h3>
         <div class="row">
         <div class="col-md-12">
-            <a href="@card.ScryfallUri">
-            <img src="@card.ImageUris["normal"]" style="max-width: 320px;" />
-            </a>
+          <a href="@card.ScryfallUri">
+            @if (card.Layout.Equals("transform", StringComparison.OrdinalIgnoreCase))
+            {
+              foreach (var face in card.CardFaces)
+              {
+                <img src="@face.ImageUris["normal"]" style="max-width: 320px;" />
+              }
+            }
+            else
+            {
+              <img src="@card.ImageUris["normal"]" style="max-width: 320px;" />
+            }
+          </a>
         </div>
         </div>
     }
 }
-
