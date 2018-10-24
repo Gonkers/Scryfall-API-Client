@@ -1,4 +1,7 @@
 # Scryfall API Client
+
+[![Build status](https://gonkers.visualstudio.com/Scryfall-API-Client/_apis/build/status/Scryfall-API-Client%20Nuget)](https://gonkers.visualstudio.com/Scryfall-API-Client/_build/latest?definitionId=5)
+
 ## Getting Started
 Until I can get better documentation, see the [samples project](https://github.com/Gonkers/Scryfall-API-Client/tree/master/samples/ScryfallApi.WebSample) for examples.
 
