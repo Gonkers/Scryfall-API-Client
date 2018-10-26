@@ -6,5 +6,7 @@ namespace ScryfallApi.Client.Models
     {
         [JsonProperty("object")]
         public string Object { get; set; }
+
+        internal Error Error { get; set; }
     }
 }

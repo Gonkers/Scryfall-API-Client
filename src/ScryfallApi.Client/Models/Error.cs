@@ -4,6 +4,11 @@ namespace ScryfallApi.Client.Models
 {
     public class Error : BaseItem
     {
+        public Error()
+        {
+            Error = this;
+        }
+
         /// <summary>
         /// An integer HTTP status code for this error.
         /// </summary>

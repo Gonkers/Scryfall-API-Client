@@ -39,6 +39,6 @@ namespace ScryfallApi.Client.Models
         /// An array of the requested objects, in a specific order.
         /// </summary>
         [JsonProperty("data")]
-        public List<T> Data { get; set; }
+        public ICollection<T> Data { get; set; }
     }
 }

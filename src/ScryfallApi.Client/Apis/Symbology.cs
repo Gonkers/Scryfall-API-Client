@@ -14,12 +14,12 @@ namespace ScryfallApi.Client.Apis
         /// Retrieve all card symbols
         /// </summary>
         /// <returns></returns>
-        public async Task<ResultList<Symbol>> Get() => await GetAsync<ResultList<Symbol>>("/symbology");
+        public Task<ResultList<Symbol>> Get() => GetAsync<ResultList<Symbol>>("/symbology");
 
         /// <summary>
         /// Parses the given mana cost parameter and returns Scryfall’s interpretation.
         /// </summary>
         /// <returns></returns>
-        public async Task<ManaCost> ParseMana(string cost) => await GetAsync<ManaCost>("/symbology/parse-mana");
+        public Task<ManaCost> ParseMana(string cost) => GetAsync<ManaCost>("/symbology/parse-mana");
     }
 }

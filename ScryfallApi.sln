@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScryfallApi.Client", "src\S
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{C470746D-B24E-4759-B7A3-6C8EDD801544}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScryfallApi.WebSample", "samples\ScryfallApi.WebSample\ScryfallApi.WebSample.csproj", "{383BF6C1-47B7-47E8-8428-B3A114EFC3B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScryfallApi.WebSample", "samples\ScryfallApi.WebSample\ScryfallApi.WebSample.csproj", "{383BF6C1-47B7-47E8-8428-B3A114EFC3B0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

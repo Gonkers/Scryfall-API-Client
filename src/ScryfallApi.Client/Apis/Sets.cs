@@ -14,13 +14,13 @@ namespace ScryfallApi.Client.Apis
         /// Returns a List object of all Sets on Scryfall.
         /// </summary>
         /// <returns></returns>
-        public async Task<ResultList<Set>> Get() => await GetAsync<ResultList<Set>>("/sets");
+        public Task<ResultList<Set>> Get() => GetAsync<ResultList<Set>>("/sets");
 
         /// <summary>
         /// Returns a Set with the given set code. The code can be either the code or the mtgo_code for the set.
         /// </summary>
         /// <param name="setCode"></param>
         /// <returns></returns>
-        public async Task<Set> Get(string setCode) => await GetAsync<Set>($"/sets/{setCode}");
+        public Task<Set> Get(string setCode) => GetAsync<Set>($"/sets/{setCode}");
     }
 }

@@ -7,37 +7,46 @@
 <div class="row">
   <div class="col-md-12">
     <p>
-        Search Query:
+      Search Query:
     </p>
     <div asp-validation-summary="All"></div>
     <form method="POST">
-        <div>Name: <input asp-for="Query" />
+      <div>
+        Name: <input asp-for="Query" />
         <input type="submit" value="Search" />
-        </div>
+      </div>
     </form>
   </div>
 </div>
-@if(@Model.Results != null)
+@if (@Model?.Results?.Data != null && Model.Results.Data.Count > 0)
 {
-    @foreach(var card in @Model.Results?.Data)
-    {
-        <h3>Result: <a href="@card.ScryfallUri">@card.Name</a></h3>
-        <div class="row">
-        <div class="col-md-12">
-          <a href="@card.ScryfallUri">
-            @if (card.Layout.Equals("transform", StringComparison.OrdinalIgnoreCase))
+  @foreach (var card in @Model.Results?.Data)
+  {
+    <h3>Result: <a href="@card.ScryfallUri">@card.Name</a></h3>
+    <div class="row">
+      <div class="col-md-12">
+        <a href="@card.ScryfallUri">
+          @if (card.Layout.Equals("transform", StringComparison.OrdinalIgnoreCase))
+          {
+            foreach (var face in card.CardFaces)
             {
-              foreach (var face in card.CardFaces)
-              {
-                <img src="@face.ImageUris["normal"]" style="max-width: 320px;" />
-              }
+              <img src="@face.ImageUris["normal"]" style="max-width: 320px;" />
             }
-            else
-            {
-              <img src="@card.ImageUris["normal"]" style="max-width: 320px;" />
-            }
-          </a>
-        </div>
-        </div>
-    }
+          }
+          else
+          {
+            <img src="@card.ImageUris["normal"]" style="max-width: 320px;" />
+          }
+        </a>
+      </div>
+    </div>
+  }
+}
+else
+{
+  <div class="row">
+    <div class="col-sm-12">
+      <p>No cards found!</p>
+    </div>
+  </div>
 }
