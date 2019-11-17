@@ -5,8 +5,8 @@ using Newtonsoft.Json;
 namespace ScryfallApi.Client.Models
 {
     /// <summary>
-    /// Card objects represent individual Magic: The Gathering cards that players could obtain
-    /// and add to their collection (with a few minor exceptions).
+    /// Card objects represent individual Magic: The Gathering cards that players could obtain and
+    /// add to their collection (with a few minor exceptions).
     /// </summary>
     public class Card : BaseItem
     {
@@ -20,15 +20,15 @@ namespace ScryfallApi.Client.Models
 
         /// <summary>
         /// This card’s multiverse IDs on Gatherer, if any, as an array of integers. Note that
-        /// Scryfall includes many promo cards, tokens, and other esoteric objects that do not
-        /// have these identifiers.
+        /// Scryfall includes many promo cards, tokens, and other esoteric objects that do not have
+        /// these identifiers.
         /// </summary>
         [JsonProperty("multiverse_ids")]
         public int[] MultiverseIds { get; set; }
 
         /// <summary>
-        /// This card’s Magic Online ID (also known as the Catalog ID), if any. A large
-        /// percentage of cards are not available on Magic Online and do not have this ID
+        /// This card’s Magic Online ID (also known as the Catalog ID), if any. A large percentage
+        /// of cards are not available on Magic Online and do not have this ID
         /// </summary>
         [JsonProperty("mtgo_id")]
         public int MtgoId { get; set; }
@@ -53,8 +53,7 @@ namespace ScryfallApi.Client.Models
         public Uri ScryfallUri { get; set; }
 
         /// <summary>
-        /// A link to where you can begin paginating all re/prints for this card on
-        /// Scryfall’s API.
+        /// A link to where you can begin paginating all re/prints for this card on Scryfall’s API.
         /// </summary>
         [JsonProperty("prints_search_uri")]
         public Uri PrintsSearchUri { get; set; }
@@ -65,8 +64,7 @@ namespace ScryfallApi.Client.Models
         [JsonProperty("rulings_uri")]
         public Uri RulingsUri { get; set; }
 
-        #endregion
-
+        #endregion Core Fields
 
         #region Gameplay Fields
 
@@ -103,15 +101,15 @@ namespace ScryfallApi.Client.Models
 
         /// <summary>
         /// The mana cost for this card. This value will be any empty string "" if the cost is
-        /// absent. Remember that per the game rules, a missing mana cost and a mana cost of {0}
-        /// are different values.
+        /// absent. Remember that per the game rules, a missing mana cost and a mana cost of {0} are
+        /// different values.
         /// </summary>
         [JsonProperty("mana_cost")]
         public string ManaCost { get; set; }
 
         /// <summary>
-        /// This card’s power, if any. Note that some cards have powers that are not numeric,
-        /// such as *.
+        /// This card’s power, if any. Note that some cards have powers that are not numeric, such
+        /// as *.
         /// </summary>
         [JsonProperty("power")]
         public string Power { get; set; }
@@ -124,22 +122,21 @@ namespace ScryfallApi.Client.Models
         public string Toughness { get; set; }
 
         /// <summary>
-        /// This loyalty if any. Note that some cards have loyalties that are not numeric,
-        /// such as X.
+        /// This loyalty if any. Note that some cards have loyalties that are not numeric, such as X.
         /// </summary>
         [JsonProperty("loyalty")]
         public string Loyalty { get; set; }
 
         /// <summary>
-        /// This card’s life modifier, if it is Vanguard card. This value will contain a
-        /// delta, such as +2.
+        /// This card’s life modifier, if it is Vanguard card. This value will contain a delta, such
+        /// as +2.
         /// </summary>
         [JsonProperty("life_modifier")]
         public string LifeModifier { get; set; }
 
         /// <summary>
-        /// This card’s hand modifier, if it is Vanguard card.This value will contain a
-        /// delta, such as -1.
+        /// This card’s hand modifier, if it is Vanguard card.This value will contain a delta, such
+        /// as -1.
         /// </summary>
         [JsonProperty("hand_modifier")]
         public string HandModifier { get; set; }
@@ -151,8 +148,8 @@ namespace ScryfallApi.Client.Models
         public string[] Colors { get; set; }
 
         /// <summary>
-        /// The colors in this card’s color indicator, if any.A null value for this field
-        /// indicates the card does not have one.
+        /// The colors in this card’s color indicator, if any.A null value for this field indicates
+        /// the card does not have one.
         /// </summary>
         [JsonProperty("color_indicator")]
         public string[] ColorIndicator { get; set; }
@@ -164,8 +161,7 @@ namespace ScryfallApi.Client.Models
         public string[] ColorIdentity { get; set; }
 
         /// <summary>
-        /// If this card is closely related to other cards, this property will be an
-        /// array with.
+        /// If this card is closely related to other cards, this property will be an array with.
         /// </summary>
         [JsonProperty("all_parts")]
         public dynamic[] AllParts { get; set; }
@@ -194,8 +190,7 @@ namespace ScryfallApi.Client.Models
         [JsonProperty("edhrec_rank")]
         public int EdhrecRank { get; set; }
 
-        #endregion
-
+        #endregion Gameplay Fields
 
         #region Print Fields
 
@@ -265,16 +260,12 @@ namespace ScryfallApi.Client.Models
         [JsonProperty("futureshifted")]
         public bool Futureshifted { get; set; }
 
-        #endregion
-
+        #endregion Print Fields
 
         #region Retail Fields
 
-        [JsonProperty("usd")]
-        public string Usd { get; set; }
-
-        [JsonProperty("eur")]
-        public string Eur { get; set; }
+        [JsonProperty("prices")]
+        public Price Price { get; set; }
 
         [JsonProperty("related_uris")]
         public Dictionary<string, Uri> RelatedUris { get; set; }
@@ -282,8 +273,7 @@ namespace ScryfallApi.Client.Models
         [JsonProperty("purchase_uris")]
         public Dictionary<string, Uri> RetailerUris { get; set; }
 
-        #endregion
-
+        #endregion Retail Fields
 
         public override string ToString() => Name +
             (!string.IsNullOrWhiteSpace(ManaCost) ? $" ({ManaCost})" : "") +
