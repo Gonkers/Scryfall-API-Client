@@ -1,26 +1,28 @@
-﻿using System.Net.Http;
+﻿using ScryfallApi.Client.Models;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Logging;
-using ScryfallApi.Client.Models;
 
 namespace ScryfallApi.Client.Apis
 {
-    public class Catalogs : BaseRestService, ICatalogs
+    public class Catalogs : ICatalogs
     {
-        internal Catalogs(HttpClient httpClient, ILogger logger, IMemoryCache cache = null) : base(httpClient, logger, cache) { }
+        private readonly BaseRestService _restService;
 
-        public async Task<string[]> ListCardNames() => (await GetAsync<Catalog>("/catalog/card-names").ConfigureAwait(false)).Data;
-        public async Task<string[]> ListWordBank() => (await GetAsync<Catalog>("/catalog/word-bank").ConfigureAwait(false)).Data;
-        public async Task<string[]> ListCreatureTypes() => (await GetAsync<Catalog>("/catalog/creature-types").ConfigureAwait(false)).Data;
-        public async Task<string[]> ListPlaneswalkerTypes() => (await GetAsync<Catalog>("/catalog/planeswalker-types").ConfigureAwait(false)).Data;
-        public async Task<string[]> ListLandTypes() => (await GetAsync<Catalog>("/catalog/land-types").ConfigureAwait(false)).Data;
-        public async Task<string[]> ListSpellTypes() => (await GetAsync<Catalog>("/catalog/spell-types").ConfigureAwait(false)).Data;
-        public async Task<string[]> ListEnchantmentTypes() => (await GetAsync<Catalog>("/catalog/enchantment-types").ConfigureAwait(false)).Data;
-        public async Task<string[]> ListArtifactTypes() => (await GetAsync<Catalog>("/catalog/artifact-types").ConfigureAwait(false)).Data;
-        public async Task<string[]> ListPowers() => (await GetAsync<Catalog>("/catalog/powers").ConfigureAwait(false)).Data;
-        public async Task<string[]> ListToughnesses() => (await GetAsync<Catalog>("/catalog/toughnesses").ConfigureAwait(false)).Data;
-        public async Task<string[]> ListLoyalties() => (await GetAsync<Catalog>("/catalog/loyalties").ConfigureAwait(false)).Data;
-        public async Task<string[]> ListWatermarks() => (await GetAsync<Catalog>("/catalog/watermarks").ConfigureAwait(false)).Data;
+        internal Catalogs(BaseRestService restService)
+        {
+            _restService = restService;
+        }
+
+        public async Task<string[]> ListCardNames() => (await _restService.GetAsync<Catalog>("/catalog/card-names").ConfigureAwait(false)).Data;
+        public async Task<string[]> ListWordBank() => (await _restService.GetAsync<Catalog>("/catalog/word-bank").ConfigureAwait(false)).Data;
+        public async Task<string[]> ListCreatureTypes() => (await _restService.GetAsync<Catalog>("/catalog/creature-types").ConfigureAwait(false)).Data;
+        public async Task<string[]> ListPlaneswalkerTypes() => (await _restService.GetAsync<Catalog>("/catalog/planeswalker-types").ConfigureAwait(false)).Data;
+        public async Task<string[]> ListLandTypes() => (await _restService.GetAsync<Catalog>("/catalog/land-types").ConfigureAwait(false)).Data;
+        public async Task<string[]> ListSpellTypes() => (await _restService.GetAsync<Catalog>("/catalog/spell-types").ConfigureAwait(false)).Data;
+        public async Task<string[]> ListEnchantmentTypes() => (await _restService.GetAsync<Catalog>("/catalog/enchantment-types").ConfigureAwait(false)).Data;
+        public async Task<string[]> ListArtifactTypes() => (await _restService.GetAsync<Catalog>("/catalog/artifact-types").ConfigureAwait(false)).Data;
+        public async Task<string[]> ListPowers() => (await _restService.GetAsync<Catalog>("/catalog/powers").ConfigureAwait(false)).Data;
+        public async Task<string[]> ListToughnesses() => (await _restService.GetAsync<Catalog>("/catalog/toughnesses").ConfigureAwait(false)).Data;
+        public async Task<string[]> ListLoyalties() => (await _restService.GetAsync<Catalog>("/catalog/loyalties").ConfigureAwait(false)).Data;
+        public async Task<string[]> ListWatermarks() => (await _restService.GetAsync<Catalog>("/catalog/watermarks").ConfigureAwait(false)).Data;
     }
 }

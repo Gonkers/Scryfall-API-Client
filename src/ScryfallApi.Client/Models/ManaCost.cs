@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace ScryfallApi.Client.Models
 {
@@ -7,37 +7,37 @@ namespace ScryfallApi.Client.Models
         /// <summary>
         /// The normalized cost, with correctly-ordered and wrapped mana symbols.
         /// </summary>
-        [JsonProperty("cost")]
+        [JsonPropertyName("cost")]
         public string Cost { get; set; }
 
         /// <summary>
         /// The converted mana cost. If you submit Un-set mana symbols, this decimal could include fractional parts.
         /// </summary>
-        [JsonProperty("cmc")]
+        [JsonPropertyName("cmc")]
         public decimal ConvertedManaCost { get; set; }
 
         /// <summary>
         /// The colors of the given cost.
         /// </summary>
-        [JsonProperty("colors")]
+        [JsonPropertyName("colors")]
         public string[] Colors { get; set; }
 
         /// <summary>
         /// True if the cost is colorless.
         /// </summary>
-        [JsonProperty("colorless")]
+        [JsonPropertyName("colorless")]
         public bool IsColorless { get; set; }
 
         /// <summary>
         /// True if the cost is monocolored.
         /// </summary>
-        [JsonProperty("monocolored")]
+        [JsonPropertyName("monocolored")]
         public bool IsMonocolored { get; set; }
 
         /// <summary>
         /// True if the cost is multicolored.
         /// </summary>
-        [JsonProperty("multicolored")]
+        [JsonPropertyName("multicolored")]
         public bool IsMulticolored { get; set; }
     }
 }

@@ -1,60 +1,50 @@
-﻿using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+﻿using Microsoft.Extensions.Caching.Memory;
 using ScryfallApi.Client.Models;
+using System;
+using System.Net.Http;
+using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace ScryfallApi.Client.Apis
 {
-    public abstract class BaseRestService
+    internal sealed class BaseRestService
     {
-        protected HttpClient _httpClient { get; }
-        protected IMemoryCache _cache { get; }
-        protected ILogger _logger { get; }
+        private readonly HttpClient _httpClient;
+        private readonly ScryfallApiClientConfig _clientConfig;
+        private readonly IMemoryCache _cache;
+        private readonly MemoryCacheEntryOptions _cacheOptions;
 
-        protected BaseRestService(HttpClient httpClient, ILogger logger = null, IMemoryCache cache = null)
+        public BaseRestService(HttpClient httpClient, ScryfallApiClientConfig clientConfig, IMemoryCache cache)
         {
             _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
-            _logger = logger;
+            _clientConfig = clientConfig;
             _cache = cache;
+
+            if (clientConfig.EnableCaching)
+            {
+                _cacheOptions = new MemoryCacheEntryOptions
+                {
+                    AbsoluteExpirationRelativeToNow = _clientConfig.UseSlidingCacheExpiration ? null : _clientConfig.CacheDuration,
+                    SlidingExpiration = _clientConfig.UseSlidingCacheExpiration ? _clientConfig.CacheDuration : null,
+                };
+            }
         }
 
-        protected async Task<T> GetAsync<T>(string resourceUrl, bool useCache = true) where T : BaseItem
+        public async Task<T> GetAsync<T>(string resourceUrl, bool useCache = true) where T : BaseItem
         {
             if (string.IsNullOrWhiteSpace(resourceUrl))
                 throw new ArgumentNullException(nameof(resourceUrl));
 
-            // Naive approach to caching
             var cacheKey = _httpClient.BaseAddress.AbsoluteUri + resourceUrl;
 
-            if (useCache)
-            {
-                if (_cache != null && _cache.TryGetValue(cacheKey, out T cached))
-                {
-                    _logger?.LogDebug("Cache hit: {0}", cacheKey);
-                    return cached;
-                }
+            if (useCache && _cache != null && _cache.TryGetValue(cacheKey, out T cached))
+                return cached;
 
-                _logger?.LogDebug("Cache miss: {0}", cacheKey);
-            }
-
-            _logger?.LogDebug("Retrieving URI: {0}", cacheKey);
             var response = await _httpClient.GetAsync(resourceUrl).ConfigureAwait(false);
-            _logger?.LogDebug("Response code: {0}", response.StatusCode);
+            var jsonStream = await response.Content.ReadAsStreamAsync();
+            var obj = await JsonSerializer.DeserializeAsync<T>(jsonStream);
 
-            var json = await response.Content.ReadAsStringAsync();
-            _logger?.LogTrace("Response text: {0}", json);
-
-            var obj = JsonConvert.DeserializeObject<T>(json);
-            if (obj.Object.Equals("error", StringComparison.OrdinalIgnoreCase))
-            {
-                obj.Error = JsonConvert.DeserializeObject<Error>(json);
-                return obj;
-            }
-
-            _cache?.Set(_httpClient.BaseAddress.AbsoluteUri + resourceUrl, obj);
+            if (useCache) _cache?.Set(cacheKey, obj, _cacheOptions);
 
             return obj;
         }
