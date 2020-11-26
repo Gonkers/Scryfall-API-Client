@@ -1,36 +1,41 @@
-﻿using System;
-using System.Net.Http;
-using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Caching.Memory;
 using ScryfallApi.Client.Apis;
+using System;
+using System.Net.Http;
 
 namespace ScryfallApi.Client
 {
-    public class ScryfallApiClient
+    public class ScryfallApiClient : IScryfallApiClient
     {
-        Lazy<ICards> _cards { get; }
+        private readonly Lazy<ICards> _cards;
         public ICards Cards => _cards.Value;
 
-        Lazy<ISets> _sets { get; }
+        private readonly Lazy<ISets> _sets;
         public ISets Sets => _sets.Value;
 
-        Lazy<ICatalogs> _catalogs { get; }
+        private readonly Lazy<ICatalogs> _catalogs;
         public ICatalogs Catalogs => _catalogs.Value;
 
-        Lazy<ISymbology> _symbology { get; }
+        private readonly Lazy<ISymbology> _symbology;
         public ISymbology Symbology => _symbology.Value;
 
         /// <summary>
         /// Instantiate a new Scryfall API client.
         /// </summary>
         /// <param name="baseUrlConnectionString">URL for Scryfall API</param>
-        public ScryfallApiClient(HttpClient httpClient, ILogger<ScryfallApiClient> logger, IMemoryCache cache = null)
+        public ScryfallApiClient(HttpClient httpClient, ScryfallApiClientConfig clientConfig = null, IMemoryCache cache = null)
         {
-            _cards = new Lazy<ICards>(() => new Cards(httpClient, logger));
-            _sets = new Lazy<ISets>(() => new Sets(httpClient, logger));
-            _catalogs = new Lazy<ICatalogs>(() => new Catalogs(httpClient, logger, cache));
-            _cards = new Lazy<ICards>(() => new Cards(httpClient, logger, cache));
-            _symbology = new Lazy<ISymbology>(() => new Symbology(httpClient, logger, cache));
+            if (clientConfig is null)
+            {
+                clientConfig = ScryfallApiClientConfig.GetDefault();
+                clientConfig.EnableCaching = cache is not null;
+            }
+
+            var restService = new BaseRestService(httpClient, clientConfig, cache);
+            _cards = new Lazy<ICards>(() => new Cards(restService));
+            _catalogs = new Lazy<ICatalogs>(() => new Catalogs(restService));
+            _sets = new Lazy<ISets>(() => new Sets(restService));
+            _symbology = new Lazy<ISymbology>(() => new Symbology(restService));
         }
     }
 }

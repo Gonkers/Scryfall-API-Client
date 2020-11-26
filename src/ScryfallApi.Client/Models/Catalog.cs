@@ -1,17 +1,17 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
+using System.Text.Json.Serialization;
 
 namespace ScryfallApi.Client.Models
 {
     class Catalog : BaseItem
     {
-        [JsonProperty("uri")]
+        [JsonPropertyName("uri")]
         public Uri Uri { get; set; }
 
-        [JsonProperty("total_values")]
+        [JsonPropertyName("total_values")]
         public int TotalValues { get; set; }
 
-        [JsonProperty("data")]
+        [JsonPropertyName("data")]
         public string[] Data { get; set; }
     }
 }

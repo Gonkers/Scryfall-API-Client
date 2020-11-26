@@ -1,12 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace ScryfallApi.Client.Models
 {
     public abstract class BaseItem
     {
-        [JsonProperty("object")]
-        public string Object { get; set; }
-
-        internal Error Error { get; set; }
+        [JsonPropertyName("object")]
+        public string ObjectType { get; set; }
     }
 }
