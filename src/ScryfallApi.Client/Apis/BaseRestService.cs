@@ -44,6 +44,19 @@ namespace ScryfallApi.Client.Apis
             var jsonStream = await response.Content.ReadAsStreamAsync();
             var obj = await JsonSerializer.DeserializeAsync<T>(jsonStream);
 
+            if (obj.ObjectType.Equals("error", StringComparison.OrdinalIgnoreCase))
+            {
+                jsonStream.Position = 0;
+                var error = await JsonSerializer.DeserializeAsync<Error>(jsonStream);
+                throw new ScryfallApiException(error.Details)
+                {
+                    ResponseStatusCode = response.StatusCode,
+                    RequestUri = response.RequestMessage.RequestUri,
+                    RequestMethod = response.RequestMessage.Method,
+                    ScryfallError = error
+                };
+            }
+
             if (useCache) _cache?.Set(cacheKey, obj, _cacheOptions);
 
             return obj;

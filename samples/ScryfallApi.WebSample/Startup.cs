@@ -22,7 +22,25 @@ namespace ScryfallApi.WebSample
         {
             services.AddRazorPages();
             services.AddLogging();
-            services.AddScryfallApiClient(config => { config.CacheDuration = TimeSpan.FromHours(1); });
+
+
+            // Example of pulling the config from IConfiguration
+            /*
+            var scryfallApiClientConfig = Configuration.GetSection("ScryfallApiClient").Get<ScryfallApiClientConfig>();
+            services.AddScryfallApiClient(scryfallApiClientConfig);
+            */
+
+            // Example of using default settings
+            /*
+            services.AddScryfallApiClient();
+            */
+
+            // Example of customizing settings with code
+            services.AddScryfallApiClient(config =>
+            {
+                config.CacheDuration = TimeSpan.FromMinutes(30);
+                config.UseSlidingCacheExpiration = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

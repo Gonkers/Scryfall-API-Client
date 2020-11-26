@@ -1,0 +1,17 @@
+﻿@page
+@model ScryfallApi.WebSample.Pages.CardsModel
+@{
+  <form method="get">
+    <select name="set" asp-items="Model.SetList" onchange="submit()"></select>
+  </form>
+
+  if (Model.CardList is not null)
+  {
+    <p>
+      @foreach (var card in Model.CardList)
+      {
+        <a href="@card.ScryfallUri"><img alt="@card.Name" title="@card.Name" src="@card.ImageUris["small"]" /></a>
+      }
+    </p>
+  }
+}

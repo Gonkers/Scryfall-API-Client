@@ -1,0 +1,18 @@
+﻿@page
+@model ScryfallApi.WebSample.Pages.SetsModel
+@{
+
+    <ul>
+        @foreach (var block in Model.MtgExpansions.GroupBy(s => s.Block).OrderByDescending(b => b.Min(s => s.ReleaseDate)))
+        {
+            <li>@block.Key
+                <ul>
+                    @foreach (var set in block.OrderByDescending(s => s.ReleaseDate))
+                    {
+                        <li>@set.Name (@set.Code) - @set.ReleaseDate.Value.ToShortDateString()</li>
+                    }
+                </ul>
+            </li>
+        }
+    </ul>
+}

@@ -6,7 +6,7 @@ namespace ScryfallApi.Client
     {
         public Uri ScryfallApiBaseAddress { get; set; } = new Uri("https://api.scryfall.com/");
         public bool EnableCaching { get; set; } = true;
-        public TimeSpan CacheDuration { get; set; } = TimeSpan.FromMinutes(5);
+        public TimeSpan CacheDuration { get; set; } = TimeSpan.FromMinutes(30);
         public bool UseSlidingCacheExpiration { get; set; } = false;
 
         internal ScryfallApiClientConfig Clone() => new ScryfallApiClientConfig

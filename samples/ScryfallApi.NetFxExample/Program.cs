@@ -15,9 +15,19 @@ namespace ScryfallApi.NetFxExample
             var client = new ScryfallApiClient(httpClient);
             do
             {
-                Console.Clear();
-                var randomCard = await client.Cards.GetRandom();
-                Console.WriteLine(DrawCard(randomCard));
+                try
+                {
+                    var randomCard = await client.Cards.GetRandom();
+                    Console.Clear();
+                    Console.WriteLine(DrawCard(randomCard));
+                }
+                catch (ScryfallApiException ex)
+                {
+                    Console.Clear();
+                    Console.WriteLine($"Error: {ex.Message}");
+                    Console.WriteLine($"Status Code: {ex.ResponseStatusCode}");
+                    Console.WriteLine($"Remote Call: {ex.RequestMethod} {ex.RequestUri}");
+                }
                 Console.WriteLine(Environment.NewLine + "Press any key for a new card. Press Esc to quit.");
             } while (Console.ReadKey().Key != ConsoleKey.Escape);
         }
@@ -60,7 +70,6 @@ namespace ScryfallApi.NetFxExample
 |+-------------------------------+|
 \---------------------------------/";
         }
-
 
         static List<string> SplitOnWidth(string text, int width)
         {
