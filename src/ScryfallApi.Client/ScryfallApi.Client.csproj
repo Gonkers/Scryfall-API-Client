@@ -2,14 +2,15 @@
 
   <PropertyGroup>
     <TargetFrameworks>net461;netstandard2.0</TargetFrameworks>
-  <PackageId>ScryfallAPI.Client</PackageId>
+    <PackageId>ScryfallAPI.Client</PackageId>
     <Version>2.0.0</Version>
     <Authors>Gonkers</Authors>
     <Company />
     <Description>.NET client library for accessing the scryfall.com API</Description>
     <PackageProjectUrl>https://github.com/Gonkers/Scryfall-API-Client</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Gonkers/Scryfall-API-Client</RepositoryUrl>
-  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageTags>scryfall scryfall-api</PackageTags>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
