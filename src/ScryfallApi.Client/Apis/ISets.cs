@@ -3,6 +3,10 @@ using ScryfallApi.Client.Models;
 
 namespace ScryfallApi.Client.Apis
 {
+    /// <summary>
+    /// APIs for card sets. A Set object represents a group of related Magic cards. All Card objects on
+    /// Scryfall belong to exactly one set.
+    /// </summary>
     public interface ISets
     {
         /// <summary>

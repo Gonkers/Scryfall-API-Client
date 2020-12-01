@@ -5,6 +5,7 @@ using static ScryfallApi.Client.Models.SearchOptions;
 
 namespace ScryfallApi.Client.Apis
 {
+    ///<inheritdoc cref="ICards"/>
     public class Cards : ICards
     {
         private readonly BaseRestService _restService;

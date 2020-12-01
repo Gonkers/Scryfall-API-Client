@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 
 namespace ScryfallApi.Client.Apis
 {
+    ///<inheritdoc cref="ISets"/>
     public class Sets : ISets
     {
         private readonly BaseRestService _restService;

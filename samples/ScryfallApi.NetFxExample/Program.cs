@@ -36,7 +36,7 @@ namespace ScryfallApi.NetFxExample
         {
             const int TitleWidth = 31;
             var cardName = card.Name + new string(' ', TitleWidth);
-            var title = cardName.Substring(0, TitleWidth - 1 - card.ManaCost.Length) + " " + card.ManaCost;
+            var title = cardName.Substring(0, TitleWidth - 1 - (card.ManaCost?.Length ?? 0)) + " " + card.ManaCost;
             var type = (card.TypeLine + new string(' ', TitleWidth)).Substring(0, TitleWidth);
 
             var cardText = SplitOnWidth(card.OracleText, 29);
@@ -73,8 +73,10 @@ namespace ScryfallApi.NetFxExample
 
         static List<string> SplitOnWidth(string text, int width)
         {
-            var rawLines = text.Split(new[] { "\n" }, StringSplitOptions.None);
             var textLines = new List<string>();
+            if (text is null) return textLines;
+
+            var rawLines = text.Split(new[] { "\n" }, StringSplitOptions.None);
             for (int i = 0; i < rawLines.Length; i++)
             {
                 var line = rawLines[i];

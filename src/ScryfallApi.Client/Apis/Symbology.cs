@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 
 namespace ScryfallApi.Client.Apis
 {
+    ///<inheritdoc cref="ISymbology"/>
     public class Symbology : ISymbology
     {
         private readonly BaseRestService _restService;
