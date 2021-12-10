@@ -73,10 +73,10 @@ public class CardFace : BaseItem
     [JsonPropertyName("printed_name")]
     public string PrintedName { get; set; }
 
-    [JsonPropertyName("printed_text"]
+    [JsonPropertyName("printed_text")]
     public string PrintedText { get; set; }
 
-    [JsonPropertyName("printed_type_line"]
+    [JsonPropertyName("printed_type_line")]
     public string PrintedTypeLine { get; set; }
 
     /// <summary>
