@@ -14,6 +14,7 @@ public class Cards : ICards
         _restService = restService;
     }
 
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public Task<ResultList<Card>> Get(int page) => _restService.GetAsync<ResultList<Card>>($"/cards?page={page}");
 
     public Task<Card> GetRandom() => _restService.GetAsync<Card>($"/cards/random", false);
@@ -28,4 +29,5 @@ public class Cards : ICards
         query = WebUtility.UrlEncode(query);
         return _restService.GetAsync<ResultList<Card>>($"/cards/search?q={query}&page={page}&{options.BuildQueryString()}");
     }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }

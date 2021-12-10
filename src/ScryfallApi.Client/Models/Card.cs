@@ -266,7 +266,7 @@ public class Card : BaseItem
     /// </summary>
     [JsonPropertyName("uri")]
     public Uri Uri { get; set; }
-#endregion Gameplay Fields
+
     [JsonPropertyName("watermark")]
     public string Watermark { get; set; }
     public override string ToString() => Name +
