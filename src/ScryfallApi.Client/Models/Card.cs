@@ -14,19 +14,40 @@ public class Card : BaseItem
     /// If this card is closely related to other cards, this property will be an array with.
     /// </summary>
     [JsonPropertyName("all_parts")]
-    public dynamic[] AllParts { get; set; }
+    public Dictionary<string, string>[] AllParts { get; set; }
+
+    [JsonPropertyName("arena_id")]
+    public int ArenaId { get; set; }
+
+    [JsonPropertyName("artist_ids")]
+    public string[] ArtistIds { get; set; }
 
     [JsonPropertyName("artist")]
     public string Artist { get; set; }
 
+    [JsonPropertyName("booster")]
+    public bool Booster { get; set; }
+
     [JsonPropertyName("border_color")]
     public string BorderColor { get; set; }
+
+    [JsonPropertyName("card_back_id")]
+    public string CardBackId { get; set; }
 
     /// <summary>
     /// An array of Card Face objects, if this card is multifaced.
     /// </summary>
     [JsonPropertyName("card_faces")]
     public CardFace[] CardFaces { get; set; }
+
+    [JsonPropertyName("cardmarket_id")]
+    public int CardMarketId { get; set; }
+
+    /// <summary>
+    /// The card’s converted mana cost, now known as mana value. Note that some funny cards have fractional mana costs.
+    /// </summary>
+    [JsonPropertyName("cmc")]
+    public decimal Cmc { get; set; }
 
     [JsonPropertyName("collector_number")]
     public string CollectorNumber { get; set; }
@@ -50,14 +71,8 @@ public class Card : BaseItem
     [JsonPropertyName("colors")]
     public string[] Colors { get; set; }
 
-    [JsonPropertyName("colorshifted")]
-    public bool Colorshifted { get; set; }
-
-    /// <summary>
-    /// The card’s converted mana cost. Note that some funny cards have fractional mana costs.
-    /// </summary>
-    [JsonPropertyName("cmc")]
-    public decimal ConvertedManaCost { get; set; }
+    [JsonPropertyName("content_warning")]
+    public bool ContentWarning { get; set; }
 
     [JsonPropertyName("digital")]
     public bool Digital { get; set; }
@@ -71,6 +86,9 @@ public class Card : BaseItem
     [JsonPropertyName("finishes")]
     public string[] Finishes { get; set; }
 
+    [JsonPropertyName("flavor_name")]
+    public string FlavorName { get; set; }
+
     [JsonPropertyName("flavor_text")]
     public string FlavorText { get; set; }
 
@@ -83,18 +101,17 @@ public class Card : BaseItem
     [JsonPropertyName("full_art")]
     public bool FullArt { get; set; }
 
-    [JsonPropertyName("futureshifted")]
-    public bool Futureshifted { get; set; }
+    [JsonPropertyName("games")]
+    public string[] Games { get; set; }
 
     /// <summary>
-    /// This card’s hand modifier, if it is Vanguard card.This value will contain a delta, such
-    /// as -1.
+    /// This card’s hand modifier, if it is Vanguard card.This value will contain a delta, such as -1.
     /// </summary>
     [JsonPropertyName("hand_modifier")]
     public string HandModifier { get; set; }
 
     [JsonPropertyName("highres_image")]
-    public bool HasHighresImage { get; set; }
+    public bool HighresImage { get; set; }
 
     /// <summary>
     /// A unique ID for this card in Scryfall’s database.
@@ -105,8 +122,17 @@ public class Card : BaseItem
     [JsonPropertyName("illustration_id")]
     public Guid IllustrationId { get; set; }
 
+    [JsonPropertyName("image_status")]
+    public string ImageStatus { get; set; }
+
     [JsonPropertyName("image_uris")]
     public Dictionary<string, Uri> ImageUris { get; set; }
+
+    [JsonPropertyName("keywords")]
+    public string[] Keywords { get; set; }
+
+    [JsonPropertyName("lang")]
+    public string Language { get; set; }
 
     /// <summary>
     /// A computer-readable designation for this card’s layout. See the layout article.
@@ -169,11 +195,17 @@ public class Card : BaseItem
     [JsonPropertyName("name")]
     public string Name { get; set; }
 
+    [JsonPropertyName("oracle_id")]
+    public string OracleId { get; set; }
+
     /// <summary>
     /// The Oracle text for this card, if any.
     /// </summary>
     [JsonPropertyName("oracle_text")]
     public string OracleText { get; set; }
+
+    [JsonPropertyName("oversized")]
+    public bool Oversized { get; set; }
 
     /// <summary>
     /// This card’s power, if any. Note that some cards have powers that are not numeric, such
@@ -182,8 +214,20 @@ public class Card : BaseItem
     [JsonPropertyName("power")]
     public string Power { get; set; }
 
+    [JsonPropertyName("preview")]
+    public Dictionary<string, string> Prewiew { get; set; }
+
     [JsonPropertyName("prices")]
-    public Price Price { get; set; }
+    public Price Prices { get; set; }
+
+    [JsonPropertyName("printed_name")]
+    public string PrintedName { get; set; }
+
+    [JsonPropertyName("printed_text"]
+    public string PrintedText { get; set; }
+
+    [JsonPropertyName("printed_type_line"]
+    public string PrintedTypeLine { get; set; }
 
     /// <summary>
     /// A link to where you can begin paginating all re/prints for this card on Scryfall’s API.
@@ -191,11 +235,23 @@ public class Card : BaseItem
     [JsonPropertyName("prints_search_uri")]
     public Uri PrintsSearchUri { get; set; }
 
+    [JsonPropertyName("produced_mana")]
+    public string[] ProducedMana { get; set; }
+
+    [JsonPropertyName("promo_types")]
+    public string[] PromoTypes { get; set; }
+
+    [JsonPropertyName("promo")]
+    public bool Promo { get; set; }
+
     [JsonPropertyName("rarity")]
     public string Rarity { get; set; }
 
     [JsonPropertyName("related_uris")]
     public Dictionary<string, Uri> RelatedUris { get; set; }
+
+    [JsonPropertyName("released_at")]
+    public string ReleasedAt { get; set; }
 
     [JsonPropertyName("reprint")]
     public bool Reprint { get; set; }
@@ -227,9 +283,6 @@ public class Card : BaseItem
     [JsonPropertyName("security_stamp")]
     public string SecurityStamp { get; set; }
 
-    [JsonPropertyName("set")]
-    public string Set { get; set; }
-
     [JsonPropertyName("set_id")]
     public string SetId { get; set; }
 
@@ -239,14 +292,26 @@ public class Card : BaseItem
     [JsonPropertyName("set_search_uri")]
     public Uri SetSearchUri { get; set; }
 
-    [JsonPropertyName("story_spotlight_number")]
-    public int StorySpotlightNumber { get; set; }
+    [JsonPropertyName("set_type")]
+    public string SetType { get; set; }
 
-    [JsonPropertyName("story_spotlight_uri")]
-    public Uri StorySpotlightUri { get; set; }
+    [JsonPropertyName("set_uri")]
+    public string SetUri { get; set; }
 
-    [JsonPropertyName("timeshifted")]
-    public bool Timeshifted { get; set; }
+    [JsonPropertyName("set")]
+    public string Set { get; set; }
+
+    [JsonPropertyName("story_spotlight")]
+    public bool StorySpotlight { get; set; }
+
+    [JsonPropertyName("tcgplayer_etched_id")]
+    public int TcgplayerEtchedId { get; set; }
+
+    [JsonPropertyName("tcgplayer_id")]
+    public int TcgplayerId { get; set; }
+
+    [JsonPropertyName("textless")]
+    public bool Textless { get; set; }
 
     /// <summary>
     /// This card’s toughness, if any. Note that some cards have toughnesses that are not
@@ -266,6 +331,12 @@ public class Card : BaseItem
     /// </summary>
     [JsonPropertyName("uri")]
     public Uri Uri { get; set; }
+
+    [JsonPropertyName("variation_of")]
+    public string VariationOf { get; set; }
+
+    [JsonPropertyName("variation")]
+    public bool Variation { get; set; }
 
     [JsonPropertyName("watermark")]
     public string Watermark { get; set; }
