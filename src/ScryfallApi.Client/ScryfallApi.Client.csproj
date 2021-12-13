@@ -4,19 +4,26 @@
     <TargetFrameworks>net6.0</TargetFrameworks>
     <ImplicitUsings>true</ImplicitUsings>
     <PackageId>ScryfallAPI.Client</PackageId>
-    <Version>3.0.0</Version>
+    <Version>3.0</Version>
     <Authors>Gonkers</Authors>
     <Company />
     <Description>.NET client library for accessing the scryfall.com API</Description>
-    <PackageProjectUrl>https://github.com/Gonkers/Scryfall-API-Client</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/Gonkers/Scryfall-API-Client</RepositoryUrl>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageTags>scryfall scryfall-api</PackageTags>
     <LangVersion>latest</LangVersion>
+    <PackageProjectUrl>https://github.com/Gonkers/Scryfall-API-Client</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Gonkers/Scryfall-API-Client</RepositoryUrl>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <DebugType>embedded</DebugType>
   </PropertyGroup>
 
+  <!--<PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">-->
+  <!--<PropertyGroup>
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+  </PropertyGroup>-->
+
   <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
     <PackageReference Include="System.Text.Json" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
