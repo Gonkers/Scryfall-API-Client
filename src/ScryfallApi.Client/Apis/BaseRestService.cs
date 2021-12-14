@@ -14,6 +14,8 @@ internal sealed class BaseRestService
     public BaseRestService(HttpClient httpClient, ScryfallApiClientConfig clientConfig, IMemoryCache cache)
     {
         _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        if (_httpClient.BaseAddress is null)
+            _httpClient.BaseAddress = clientConfig.ScryfallApiBaseAddress;
         _clientConfig = clientConfig;
         _cache = cache;
 
