@@ -23,6 +23,14 @@ public interface ICards
     Task<ResultList<Card>> Get(int page);
 
     /// <summary>
+    /// Search for exactly one card of the given name. Search parameters can be either exact or fuzzy.
+    /// </summary>
+    /// <param name="cardname"></param>
+    /// <param name="fuzzySearch"></param>
+    /// <returns></returns>
+    Task<Card> Named(string cardname, bool fuzzySearch);
+
+    /// <summary>
     /// Search for cards with a sort option
     /// </summary>
     /// <param name="query"></param>
@@ -39,4 +47,5 @@ public interface ICards
     /// <param name="options"></param>
     /// <returns></returns>
     Task<ResultList<Card>> Search(string query, int page, SearchOptions options);
+
 }

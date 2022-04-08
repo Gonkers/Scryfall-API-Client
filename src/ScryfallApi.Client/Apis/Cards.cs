@@ -19,6 +19,13 @@ public class Cards : ICards
 
     public Task<Card> GetRandom() => _restService.GetAsync<Card>($"/cards/random", false);
 
+    public Task<Card> Named(string cardname, bool fuzzySearch)
+    {
+        cardname = WebUtility.UrlEncode(cardname);
+        var searchType = fuzzySearch ? "fuzzy" : "exact";
+        return _restService.GetAsync<Card>($"/cards/named?{searchType}={cardname}");
+    }
+
     public Task<ResultList<Card>> Search(string query, int page, CardSort sort) =>
         Search(query, page, new SearchOptions { Sort = sort });
 
@@ -29,5 +36,6 @@ public class Cards : ICards
         query = WebUtility.UrlEncode(query);
         return _restService.GetAsync<ResultList<Card>>($"/cards/search?q={query}&page={page}&{options.BuildQueryString()}");
     }
+
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }
