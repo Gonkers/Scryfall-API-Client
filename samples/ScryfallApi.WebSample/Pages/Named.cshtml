@@ -1,0 +1,49 @@
+﻿@page
+@model NamedModel
+@{
+}
+
+<h2>Named</h2>
+<div class="row">
+  <div class="col-md-12">
+    <p>
+      Search Query:
+    </p>
+    <div asp-validation-summary="All"></div>
+    <form method="POST">
+      <div>
+        Name: <input asp-for="Query" />
+        <input type="submit" value="Search" />
+      </div>
+    </form>
+  </div>
+</div>
+@if (@Model?.NamedCard != null)
+{
+    <h3>Result: <a href="@Model.NamedCard.ScryfallUri">@Model.NamedCard.Name</a></h3>
+    <div class="row">
+      <div class="col-md-12">
+        <a href="@Model.NamedCard.ScryfallUri">
+          @if (Model.NamedCard.Layout.Equals("transform", StringComparison.OrdinalIgnoreCase))
+          {
+            foreach (var face in Model.NamedCard.CardFaces)
+            {
+              <img src="@face.ImageUris["normal"]" style="max-width: 320px;" />
+            }
+          }
+          else
+          {
+            <img src="@Model.NamedCard.ImageUris["normal"]" style="max-width: 320px;" />
+          }
+        </a>
+      </div>
+    </div>
+}
+else
+{
+  <div class="row">
+    <div class="col-sm-12">
+      <p>No cards found!</p>
+    </div>
+  </div>
+}
