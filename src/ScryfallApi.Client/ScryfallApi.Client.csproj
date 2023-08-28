@@ -1,32 +1,39 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0</TargetFrameworks>
-    <ImplicitUsings>true</ImplicitUsings>
-    <PackageId>ScryfallAPI.Client</PackageId>
-    <Version>3.0</Version>
-    <Authors>Gonkers</Authors>
-    <Company />
-    <Description>.NET client library for accessing the scryfall.com API</Description>
-    <PackageTags>scryfall scryfall-api</PackageTags>
+    <TargetFramework>netstandard2.1</TargetFramework>
+	<ImplicitUsings>true</ImplicitUsings>
+	<PackageId>ScryfallAPI.Client</PackageId>
+	<Version>3.0</Version>
+	<Authors>Gonkers</Authors>
+	<Company />
+	<Description>.NET client library for accessing the scryfall.com API</Description>
+	<PackageTags>scryfall scryfall-api</PackageTags>
+    <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
-    <PackageProjectUrl>https://github.com/Gonkers/Scryfall-API-Client</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/Gonkers/Scryfall-API-Client</RepositoryUrl>
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    <DebugType>embedded</DebugType>
+	<PackageProjectUrl>https://github.com/Gonkers/Scryfall-API-Client</PackageProjectUrl>
+	<RepositoryUrl>https://github.com/Gonkers/Scryfall-API-Client</RepositoryUrl>
+	<PublishRepositoryUrl>true</PublishRepositoryUrl>
+	<EmbedUntrackedSources>true</EmbedUntrackedSources>
+	<DebugType>embedded</DebugType>
+
   </PropertyGroup>
 
-  <!--<PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">-->
-  <!--<PropertyGroup>
+	<!--<PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">-->
+	<!--<PropertyGroup>
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
   </PropertyGroup>-->
 
+
+	<ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
   <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
-    <PackageReference Include="System.Text.Json" Version="6.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="6.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
+    <PackageReference Include="System.Text.Json" Version="7.0.3" />
   </ItemGroup>
 
 </Project>
