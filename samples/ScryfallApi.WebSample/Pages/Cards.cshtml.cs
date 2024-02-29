@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -14,7 +10,7 @@ namespace ScryfallApi.WebSample.Pages
     {
         private readonly ScryfallApiClient _scryfallApi;
         public List<SelectListItem> SetList { get; set; }
-        public ICollection<Card> CardList { get; set; }
+        public IReadOnlyCollection<Card> CardList { get; set; }
 
         public CardsModel(ScryfallApiClient scryfallApi)
         {
@@ -33,7 +29,7 @@ namespace ScryfallApi.WebSample.Pages
                 CardList = (await _scryfallApi.Cards.Search($"e:{selectedItem.Value}", 1, SearchOptions.CardSort.Name)).Data;
             }
             else
-                CardList = new List<Card>();
+                CardList = [];
 
             return Page();
         }

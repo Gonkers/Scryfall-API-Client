@@ -18,5 +18,5 @@ public interface ISymbology
     /// Parses the given mana cost parameter and returns Scryfall’s interpretation.
     /// </summary>
     /// <returns></returns>
-    Task<ManaCost> ParseMana(string cost);
+    Task<ParsedManaCost> ParseMana(string cost);
 }

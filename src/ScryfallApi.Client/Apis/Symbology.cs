@@ -22,5 +22,5 @@ public class Symbology : ISymbology
     /// Parses the given mana cost parameter and returns Scryfall’s interpretation.
     /// </summary>
     /// <returns></returns>
-    public Task<ManaCost> ParseMana(string cost) => _restService.GetAsync<ManaCost>("/symbology/parse-mana");
+    public Task<ParsedManaCost> ParseMana(string cost) => _restService.GetAsync<ParsedManaCost>("/symbology/parse-mana");
 }
