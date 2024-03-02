@@ -5,7 +5,7 @@ namespace ScryfallApi.Client.Models;
 class Catalog : BaseItem
 {
     [JsonPropertyName("uri")]
-    public Uri Uri { get; init; }
+    public Uri Uri { get; init; } = new(ScryfallApiClientConfig.ScryfallApiAddress);
 
     [JsonPropertyName("total_values")]
     public int TotalValues { get; init; }

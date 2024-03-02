@@ -67,7 +67,7 @@ public class CardFace : BaseItem
     /// is not double-sided, then the image_uris property will be part of the parent object instead.
     /// </summary>
     [JsonPropertyName("image_uris")]
-    public Dictionary<string, Uri>? ImageUris { get; init; }
+    public Dictionary<string, Uri> ImageUris { get; init; } = [];
 
     /// <summary>
     /// The layout of this card face, if the card is reversible.
@@ -137,7 +137,7 @@ public class CardFace : BaseItem
     /// numeric, such as *.
     /// </summary>
     [JsonPropertyName("toughness")]
-    public string Toughness { get; init; }
+    public string Toughness { get; init; } = string.Empty;
 
     /// <summary>
     /// The type line of this particular face, if the card is reversible.

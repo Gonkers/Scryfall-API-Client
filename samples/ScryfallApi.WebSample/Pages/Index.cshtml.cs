@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using ScryfallApi.Client;
 using ScryfallApi.Client.Models;
 
@@ -17,9 +15,9 @@ namespace ScryfallApi.WebSample.Pages
 
         public async Task OnGet()
         {
-            RandomCard = await _scryfallApi.Cards.GetRandom();
+            RandomCard = await _scryfallApi.Cards.GetRandom() ?? new Card();
         }
 
-        public Card RandomCard { get; set; }
+        public Card RandomCard { get; set; } = new Card();
     }
 }

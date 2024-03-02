@@ -23,7 +23,7 @@ public class Ruling : BaseItem
     /// A computer-readable string indicating which company produced this ruling, either wotc or scryfall.
     /// </summary>
     [JsonPropertyName("source")]
-    public string Soruce { get; init; }
+    public string Soruce { get; init; } = string.Empty;
 
     /// <summary>
     /// The date when the ruling or note was published.
@@ -35,5 +35,5 @@ public class Ruling : BaseItem
     /// The text of the ruling.
     /// </summary>
     [JsonPropertyName("comment")]
-    public string Comment { get; init; }
+    public string Comment { get; init; } = string.Empty;
 }

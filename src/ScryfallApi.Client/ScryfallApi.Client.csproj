@@ -20,25 +20,18 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
-    <PackageReference Include="System.Text.Json" Version="8.0.2" />
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="8.0.1" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
-    <PackageReference Include="System.Text.Json" Version="6.0.9" />
-    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="6.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
+    <PackageReference Include="System.Text.Json" Version="8.0.2" />
   </ItemGroup>
 
   <!--<PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">-->
   <!--<PropertyGroup>
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
   </PropertyGroup>-->
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
-  </ItemGroup>
 
 </Project>
