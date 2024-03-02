@@ -2,6 +2,10 @@
 
 namespace ScryfallApi.Client.Models;
 
+/// <summary>
+/// A Card Symbol object represents an illustrated symbol that may appear in card’s mana cost
+/// or Oracle text. Symbols are based on the notation used in the Comprehensive Rules.
+/// </summary>
 public class Symbol : BaseItem
 {
     /// <summary>
@@ -9,7 +13,7 @@ public class Symbol : BaseItem
     /// are ASCII text (for example, {∞}).
     /// </summary>
     [JsonPropertyName("symbol")]
-    public string Text { get; init; }
+    public string Text { get; init; } = string.Empty;
 
     /// <summary>
     /// An alternate version of this symbol, if it is possible to write it without curly braces.
@@ -22,7 +26,7 @@ public class Symbol : BaseItem
     /// accessible communication formats.
     /// </summary>
     [JsonPropertyName("english")]
-    public string Description { get; init; }
+    public string Description { get; init; } = string.Empty;
 
     /// <summary>
     /// True if it is possible to write this symbol “backwards”. For example, the official symbol
@@ -83,11 +87,11 @@ public class Symbol : BaseItem
     /// original printed text. For example: {W} has ["oW", "ooW"] as alternates.
     ///</summary>
     [JsonPropertyName("gatherer_alternates")]
-    public string? gatherer_alternates { get; init; }
+    public string? GathererAlternates { get; init; }
 
     ///<summary>
     /// A URI to an SVG image of this symbol on Scryfall’s CDNs.
     ///</summary>
     [JsonPropertyName("svg_uri")]
-    public Uri? svg_uri { get; init; }
+    public Uri? SvgUri { get; init; }
 }

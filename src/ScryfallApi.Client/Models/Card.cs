@@ -28,7 +28,7 @@ public class Card : BaseItem
     /// A language code for this printing.
     /// </summary>
     [JsonPropertyName("lang")]
-    public string Language { get; init; }
+    public string Language { get; init; } = string.Empty;
 
     /// <summary>
     /// This card’s Magic Online ID (also known as the Catalog ID), if any. A large percentage of cards are not available on Magic Online and do not have this ID.
@@ -70,7 +70,7 @@ public class Card : BaseItem
     /// A code for this card’s layout.
     /// </summary>
     [JsonPropertyName("layout")]
-    public string Layout { get; init; }
+    public string Layout { get; init; } = string.Empty;
 
     /// <summary>
     /// A unique ID for this card’s oracle identity. This value is consistent across reprinted card editions, and unique among different cards with the same name (tokens, Unstable variants, etc). Always present except for the reversible_card layout where it will be absent; oracle_id will be found on each face instead.
@@ -82,25 +82,25 @@ public class Card : BaseItem
     /// A link to where you can begin paginating all re/prints for this card on Scryfall’s API.
     /// </summary>
     [JsonPropertyName("prints_search_uri")]
-    public Uri PrintsSearchUri { get; init; }
+    public Uri PrintsSearchUri { get; init; } = new(ScryfallApiClientConfig.ScryfallApiAddress);
 
     /// <summary>
     /// A link to this card’s rulings list on Scryfall’s API.
     /// </summary>
     [JsonPropertyName("rulings_uri")]
-    public Uri RulingsUri { get; init; }
+    public Uri RulingsUri { get; init; } = new(ScryfallApiClientConfig.ScryfallApiAddress);
 
     /// <summary>
     /// A link to this card’s permapage on Scryfall’s website.
     /// </summary>
     [JsonPropertyName("scryfall_uri")]
-    public Uri ScryfallUri { get; init; }
+    public Uri ScryfallUri { get; init; } = new(ScryfallApiClientConfig.ScryfallApiAddress);
 
     /// <summary>
     /// A link to this card object on Scryfall’s API.
     /// </summary>
     [JsonPropertyName("uri")]
-    public Uri Uri { get; init; }
+    public Uri Uri { get; init; } = new(ScryfallApiClientConfig.ScryfallApiAddress);
 
     #endregion
 
@@ -172,7 +172,7 @@ public class Card : BaseItem
     /// An object describing the legality of this card across play formats. Possible legalities are legal, not_legal, restricted, and banned.
     /// </summary>
     [JsonPropertyName("legalities")]
-    public Object Legalities { get; init; }
+    public Dictionary<string, string> Legalities { get; init; } = [];
 
     /// <summary>
     ///  This card’s life modifier, if it is Vanguard card. This value will contain a delta, such as +2.
@@ -196,7 +196,7 @@ public class Card : BaseItem
     /// The name of this card. If this card has multiple faces, this field will contain both names separated by ␣//␣.
     /// </summary>
     [JsonPropertyName("name")]
-    public string Name { get; init; }
+    public string Name { get; init; } = string.Empty;
 
     /// <summary>
     ///  The Oracle text for this card, if any.
@@ -238,7 +238,7 @@ public class Card : BaseItem
     /// The type line of this card.
     /// </summary>
     [JsonPropertyName("type_line")]
-    public string TypeLine { get; init; }
+    public string TypeLine { get; init; } = string.Empty;
 
     #endregion
 
@@ -273,7 +273,7 @@ public class Card : BaseItem
     /// This card’s border color: black, white, borderless, silver, or gold.
     /// </summary>
     [JsonPropertyName("border_color")]
-    public string BorderColor { get; init; }
+    public string BorderColor { get; init; } = string.Empty;
 
     /// <summary>
     /// The Scryfall ID for the card back design present on this card.
@@ -285,7 +285,7 @@ public class Card : BaseItem
     /// This card’s collector number. Note that collector numbers can contain non-numeric characters, such as letters or ★.
     /// </summary>
     [JsonPropertyName("collector_number")]
-    public string CollectorNumber { get; init; }
+    public string CollectorNumber { get; init; } = string.Empty;
 
     /// <summary>
     /// True if you should consider avoiding use of this print downstream.
@@ -327,7 +327,7 @@ public class Card : BaseItem
     /// This card’s frame layout.
     /// </summary>
     [JsonPropertyName("frame")]
-    public string Frame { get; init; }
+    public string Frame { get; init; } = string.Empty;
 
     /// <summary>
     /// True if this card’s artwork is larger than normal.
@@ -357,7 +357,7 @@ public class Card : BaseItem
     /// A computer-readable indicator for the state of this card’s image, one of missing, placeholder, lowres, or highres_scan.
     /// </summary>
     [JsonPropertyName("image_status")]
-    public string ImageStatus { get; init; }
+    public string ImageStatus { get; init; } = string.Empty;
 
     /// <summary>
     /// An object listing available imagery for this card. See the Card Imagery article for more information.
@@ -375,7 +375,7 @@ public class Card : BaseItem
     /// An object containing daily price information for this card, including usd, usd_foil, usd_etched, eur, eur_foil, eur_etched, and tix prices, as strings.
     /// </summary>
     [JsonPropertyName("prices")]
-    public Price Prices { get; init; }
+    public Price Prices { get; init; } = new Price();
 
     /// <summary>
     /// The localized name printed on this card, if any.
@@ -417,7 +417,7 @@ public class Card : BaseItem
     /// This card’s rarity. One of common, uncommon, rare, special, mythic, or bonus.
     /// </summary>
     [JsonPropertyName("rarity")]
-    public string Rarity { get; init; }
+    public string Rarity { get; init; } = string.Empty;
 
     /// <summary>
     /// An object providing URIs to this card’s listing on other Magic: The Gathering online resources.
@@ -441,37 +441,37 @@ public class Card : BaseItem
     /// A link to this card’s set on Scryfall’s website.
     /// </summary>
     [JsonPropertyName("scryfall_set_uri")]
-    public Uri ScryfallSetUri { get; init; }
+    public Uri ScryfallSetUri { get; init; } = new(ScryfallApiClientConfig.ScryfallApiAddress);
 
     /// <summary>
     /// This card’s full set name.
     /// </summary>
     [JsonPropertyName("set_name")]
-    public string SetName { get; init; }
+    public string SetName { get; init; } = string.Empty;
 
     /// <summary>
     /// A link to where you can begin paginating this card’s set on the Scryfall API.
     /// </summary>
     [JsonPropertyName("set_search_uri")]
-    public Uri SetSearchUri { get; init; }
+    public Uri SetSearchUri { get; init; } = new(ScryfallApiClientConfig.ScryfallApiAddress);
 
     /// <summary>
     /// The type of set this printing is in.
     /// </summary>
     [JsonPropertyName("set_type")]
-    public string SetType { get; init; }
+    public string SetType { get; init; } = string.Empty;
 
     /// <summary>
     /// A link to this card’s set object on Scryfall’s API.
     /// </summary>
     [JsonPropertyName("set_uri")]
-    public Uri SetUri { get; init; }
+    public Uri SetUri { get; init; } = new(ScryfallApiClientConfig.ScryfallApiAddress);
 
     /// <summary>
     /// This card’s set code.
     /// </summary>
     [JsonPropertyName("set")]
-    public string Set { get; init; }
+    public string Set { get; init; } = string.Empty;
 
     /// <summary>
     /// This card’s Set object UUID.
@@ -521,7 +521,7 @@ public class Card : BaseItem
     /// previewed_at - The date this card was previewed.
     /// </summary>
     [JsonPropertyName("preview")]
-    public Dictionary<string, string> Prewiew { get; init; }
+    public Dictionary<string, string> Prewiew { get; init; } = [];
 
     #endregion
 
@@ -530,6 +530,6 @@ public class Card : BaseItem
     /// </summary>
     /// <returns></returns>
     public override string ToString() => Name +
-     (!string.IsNullOrWhiteSpace(ManaCost) ? $" ({ManaCost})" : "") +
-     (!string.IsNullOrWhiteSpace(TypeLine) ? $" {TypeLine}" : "");
+        (!string.IsNullOrWhiteSpace(ManaCost) ? $" ({ManaCost})" : "") +
+        (!string.IsNullOrWhiteSpace(TypeLine) ? $" {TypeLine}" : "");
 }

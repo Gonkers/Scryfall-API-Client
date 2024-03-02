@@ -1,5 +1,8 @@
 ﻿namespace ScryfallApi.Client.Models;
 
+/// <summary>
+/// Search options for the Scryfall API.
+/// </summary>
 public struct SearchOptions
 {
     /// <summary>

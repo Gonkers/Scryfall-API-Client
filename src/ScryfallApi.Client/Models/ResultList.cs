@@ -27,14 +27,14 @@ public class ResultList<T> : BaseItem where T : BaseItem
     /// page. You may submit a HTTP GET request to that URI to continue paginating forward on this List.
     /// </summary>
     [JsonPropertyName("next_page")]
-    public Uri NextPage { get; init; }
+    public Uri? NextPage { get; init; }
 
     /// <summary>
     /// If this is a list of Card objects, this field will contain the total number of cards found
     /// across all pages.
     /// </summary>
     [JsonPropertyName("total_cards")]
-    public int TotalCards { get; init; }
+    public int? TotalCards { get; init; }
 
     /// <summary>
     /// An array of human-readable warnings issued when generating this list, as strings. Warnings

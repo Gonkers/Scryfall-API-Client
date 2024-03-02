@@ -11,7 +11,7 @@ public class ParsedManaCost : BaseItem
     /// The normalized cost, with correctly-ordered and wrapped mana symbols.
     /// </summary>
     [JsonPropertyName("cost")]
-    public string Cost { get; init; }
+    public string Cost { get; init; } = string.Empty;
 
     /// <summary>
     /// The converted mana cost. If you submit Un-set mana symbols, this decimal could include fractional parts.

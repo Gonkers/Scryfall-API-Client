@@ -95,7 +95,7 @@ public class Set : BaseItem
     /// The denominator for the set’s printed collector numbers.
     /// </summary>
     [JsonPropertyName("printed_size")]
-    public string? PrintedSize { get; init; }
+    public int? PrintedSize { get; init; }
 
     /// <summary>
     /// The date the set was released (in GMT-8 Pacific time). Not all sets have a known release date.
