@@ -15,14 +15,14 @@ public class Cards : ICards
     }
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-    public Task<ResultList<Card>> Get(int page) => _restService.GetAsync<ResultList<Card>>($"/cards?page={page}");
+    public Task<ResultList<Card>?> Get(int page) => _restService.GetAsync<ResultList<Card>>($"/cards?page={page}");
 
-    public Task<Card> GetRandom() => _restService.GetAsync<Card>($"/cards/random", false);
+    public Task<Card?> GetRandom() => _restService.GetAsync<Card>("/cards/random", false);
 
-    public Task<ResultList<Card>> Search(string query, int page, CardSort sort) =>
+    public Task<ResultList<Card>?> Search(string query, int page, CardSort sort) =>
         Search(query, page, new SearchOptions { Sort = sort });
 
-    public Task<ResultList<Card>> Search(string query, int page, SearchOptions options = default)
+    public Task<ResultList<Card>?> Search(string query, int page, SearchOptions options = default)
     {
         if (page < 1) page = 1;
 

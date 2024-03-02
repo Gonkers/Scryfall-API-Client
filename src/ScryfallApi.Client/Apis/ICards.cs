@@ -13,14 +13,14 @@ public interface ICards
     /// Fetch a card at random.
     /// </summary>
     /// <returns></returns>
-    Task<Card> GetRandom();
+    Task<Card?> GetRandom();
 
     /// <summary>
     /// Get a page worth of cards
     /// </summary>
     /// <param name="page"></param>
     /// <returns></returns>
-    Task<ResultList<Card>> Get(int page);
+    Task<ResultList<Card>?> Get(int page);
 
     /// <summary>
     /// Search for cards with a sort option
@@ -29,8 +29,8 @@ public interface ICards
     /// <param name="page"></param>
     /// <param name="sort"></param>
     /// <returns></returns>
-    Task<ResultList<Card>> Search(string query, int page, CardSort sort);
-    
+    Task<ResultList<Card>?> Search(string query, int page, CardSort sort);
+
     /// <summary>
     /// Search for cards using the full search options available
     /// </summary>
@@ -38,5 +38,5 @@ public interface ICards
     /// <param name="page"></param>
     /// <param name="options"></param>
     /// <returns></returns>
-    Task<ResultList<Card>> Search(string query, int page, SearchOptions options);
+    Task<ResultList<Card>?> Search(string query, int page, SearchOptions options);
 }

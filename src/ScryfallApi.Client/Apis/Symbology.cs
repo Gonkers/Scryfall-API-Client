@@ -16,11 +16,11 @@ public class Symbology : ISymbology
     /// Retrieve all card symbols
     /// </summary>
     /// <returns></returns>
-    public Task<ResultList<Symbol>> Get() => _restService.GetAsync<ResultList<Symbol>>("/symbology");
+    public Task<ResultList<Symbol>?> Get() => _restService.GetAsync<ResultList<Symbol>>("/symbology");
 
     /// <summary>
     /// Parses the given mana cost parameter and returns Scryfall’s interpretation.
     /// </summary>
     /// <returns></returns>
-    public Task<ManaCost> ParseMana(string cost) => _restService.GetAsync<ManaCost>("/symbology/parse-mana");
+    public Task<ParsedManaCost?> ParseMana(string cost) => _restService.GetAsync<ParsedManaCost>("/symbology/parse-mana");
 }

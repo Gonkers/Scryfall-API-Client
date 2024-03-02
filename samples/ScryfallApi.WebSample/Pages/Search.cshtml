@@ -20,7 +20,7 @@
 </div>
 @if (@Model?.Results?.Data != null && Model.Results.Data.Count > 0)
 {
-  @foreach (var card in @Model.Results?.Data)
+  @foreach (var card in @Model.Results?.Data ?? [])
   {
     <h3>Result: <a href="@card.ScryfallUri">@card.Name</a></h3>
     <div class="row">
@@ -28,7 +28,7 @@
         <a href="@card.ScryfallUri">
           @if (card.Layout.Equals("transform", StringComparison.OrdinalIgnoreCase))
           {
-            foreach (var face in card.CardFaces)
+            foreach (var face in card.CardFaces.Where(f => f is not null))
             {
               <img src="@face.ImageUris["normal"]" style="max-width: 320px;" />
             }

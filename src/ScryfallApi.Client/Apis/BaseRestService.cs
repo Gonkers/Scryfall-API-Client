@@ -14,45 +14,44 @@ internal sealed class BaseRestService
     public BaseRestService(HttpClient httpClient, ScryfallApiClientConfig clientConfig, IMemoryCache cache)
     {
         _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
-        if (_httpClient.BaseAddress is null)
-            _httpClient.BaseAddress = clientConfig.ScryfallApiBaseAddress;
+        _httpClient.BaseAddress ??= clientConfig.ScryfallApiBaseAddress;
         _clientConfig = clientConfig;
         _cache = cache;
-
-        if (clientConfig.EnableCaching)
+        _cacheOptions = new MemoryCacheEntryOptions
         {
-            _cacheOptions = new MemoryCacheEntryOptions
-            {
-                AbsoluteExpirationRelativeToNow = _clientConfig.UseSlidingCacheExpiration ? null : _clientConfig.CacheDuration,
-                SlidingExpiration = _clientConfig.UseSlidingCacheExpiration ? _clientConfig.CacheDuration : null,
-            };
-        }
+            AbsoluteExpirationRelativeToNow = _clientConfig.UseSlidingCacheExpiration ? null : _clientConfig.CacheDuration,
+            SlidingExpiration = _clientConfig.UseSlidingCacheExpiration ? _clientConfig.CacheDuration : null,
+        };
     }
 
-    public async Task<T> GetAsync<T>(string resourceUrl, bool useCache = true) where T : BaseItem
+    public async Task<T?> GetAsync<T>(string resourceUrl, bool useCache = true) where T : BaseItem
     {
         if (string.IsNullOrWhiteSpace(resourceUrl))
             throw new ArgumentNullException(nameof(resourceUrl));
 
-        var cacheKey = _httpClient.BaseAddress.AbsoluteUri + resourceUrl;
+        var baseAddress = _httpClient.BaseAddress?.AbsoluteUri ?? ScryfallApiClientConfig.ScryfallApiAddress;
+        var cacheKey = baseAddress + resourceUrl;
 
-        if (useCache && _cache != null && _cache.TryGetValue(cacheKey, out T cached))
+        if (useCache && _cache.TryGetValue(cacheKey, out T? cached) && cached is not null)
             return cached;
 
-        var response = await _httpClient.GetAsync(resourceUrl).ConfigureAwait(false);
+        var request = new HttpRequestMessage(HttpMethod.Get, resourceUrl);
+        var response = await _httpClient.SendAsync(request).ConfigureAwait(false);
+        response.EnsureSuccessStatusCode();
+
         var jsonStream = await response.Content.ReadAsStreamAsync();
         var obj = await JsonSerializer.DeserializeAsync<T>(jsonStream);
 
-        if (obj.ObjectType.Equals("error", StringComparison.OrdinalIgnoreCase))
+        if (obj?.ObjectType.Equals("error", StringComparison.OrdinalIgnoreCase) ?? false)
         {
             jsonStream.Position = 0;
             var error = await JsonSerializer.DeserializeAsync<Error>(jsonStream);
-            throw new ScryfallApiException(error.Details)
+            throw new ScryfallApiException(error?.Details ?? "An unknown response was returned from the API.")
             {
                 ResponseStatusCode = response.StatusCode,
-                RequestUri = response.RequestMessage.RequestUri,
-                RequestMethod = response.RequestMessage.Method,
-                ScryfallError = error
+                RequestUri = request.RequestUri ?? new(ScryfallApiClientConfig.ScryfallApiAddress),
+                RequestMethod = request.Method,
+                ScryfallError = error ?? new()
             };
         }
 
