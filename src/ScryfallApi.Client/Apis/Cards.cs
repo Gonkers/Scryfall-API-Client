@@ -14,20 +14,22 @@ public class Cards : ICards
         _restService = restService;
     }
 
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-    public Task<ResultList<Card>> Get(int page) => _restService.GetAsync<ResultList<Card>>($"/cards?page={page}");
+    ///<inheritdoc cref="ICards"/>
+    public Task<ResultList<Card>?> Get(int page) => _restService.GetAsync<ResultList<Card>>($"/cards?page={page}");
 
-    public Task<Card> GetRandom() => _restService.GetAsync<Card>($"/cards/random", false);
+    ///<inheritdoc cref="ICards"/>
+    public Task<Card?> GetRandom() => _restService.GetAsync<Card>("/cards/random", false);
 
-    public Task<ResultList<Card>> Search(string query, int page, CardSort sort) =>
-        Search(query, page, new SearchOptions { Sort = sort });
+    ///<inheritdoc cref="ICards"/>
+    public Task<ResultList<Card>?> Search(string query, int page, CardSort sort) =>
+        Search(query, new() { Page = page, Sort = sort });
 
-    public Task<ResultList<Card>> Search(string query, int page, SearchOptions options = default)
+    ///<inheritdoc cref="ICards"/>
+    public Task<ResultList<Card>?> Search(string query, SearchOptions options = default)
     {
-        if (page < 1) page = 1;
-
-        query = WebUtility.UrlEncode(query);
-        return _restService.GetAsync<ResultList<Card>>($"/cards/search?q={query}&page={page}&{options.BuildQueryString()}");
+        if (string.IsNullOrWhiteSpace(query))
+            throw new ArgumentException($"The parameter {nameof(query)} cannot be null or empty", nameof(query));
+        
+        return _restService.GetAsync<ResultList<Card>>($"/cards/search?q={WebUtility.UrlEncode(query)}{options}");
     }
-#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }

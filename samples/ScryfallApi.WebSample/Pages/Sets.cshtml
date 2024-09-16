@@ -7,9 +7,9 @@
         {
             <li>@block.Key
                 <ul>
-                    @foreach (var set in block.OrderByDescending(s => s.ReleaseDate))
+                    @foreach (var set in block.Where(s => s is not null).OrderByDescending(s => s.ReleaseDate))
                     {
-                        <li>@set.Name (@set.Code) - @set.ReleaseDate.Value.ToShortDateString()</li>
+                        <li>@set.Name (@set.Code) - @set.ReleaseDate.ToString()</li>
                     }
                 </ul>
             </li>

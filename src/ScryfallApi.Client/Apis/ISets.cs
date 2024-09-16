@@ -12,12 +12,26 @@ public interface ISets
     /// Returns a List object of all Sets on Scryfall.
     /// </summary>
     /// <returns></returns>
-    Task<ResultList<Set>> Get();
+    Task<ResultList<Set>?> Get();
 
     /// <summary>
     /// Returns a Set with the given set code. The code can be either the code or the mtgo_code for the set.
     /// </summary>
     /// <param name="setCode"></param>
     /// <returns></returns>
-    Task<Set> Get(string setCode);
+    Task<Set?> Get(string setCode);
+
+    /// <summary>
+    /// Returns a Set with the given ID.
+    /// </summary>
+    /// <param name="setId">The Scryfall ID</param>
+    /// <returns></returns>
+    Task<Set?> Get(Guid setId);
+
+    /// <summary>
+    /// Returns a Set with the given TCG Player ID.
+    /// </summary>
+    /// <param name="setId"></param>
+    /// <returns></returns>
+    Task<Set?> GetByTcgPlayerId(int setId);
 }

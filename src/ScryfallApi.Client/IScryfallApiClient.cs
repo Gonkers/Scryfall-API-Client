@@ -20,4 +20,7 @@ public interface IScryfallApiClient
 
     ///<inheritdoc cref="ISymbology"/>
     ISymbology Symbology { get; }
+    
+    ///<inheritdoc cref="IBulkData"/>
+    IBulkData BulkData { get; }
 }

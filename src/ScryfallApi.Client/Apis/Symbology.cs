@@ -12,15 +12,9 @@ public class Symbology : ISymbology
         _restService = restService;
     }
 
-    /// <summary>
-    /// Retrieve all card symbols
-    /// </summary>
-    /// <returns></returns>
-    public Task<ResultList<Symbol>> Get() => _restService.GetAsync<ResultList<Symbol>>("/symbology");
+    ///<inheritdoc cref="ISymbology"/>
+    public Task<ResultList<Symbol>?> Get() => _restService.GetAsync<ResultList<Symbol>>("/symbology");
 
-    /// <summary>
-    /// Parses the given mana cost parameter and returns Scryfall’s interpretation.
-    /// </summary>
-    /// <returns></returns>
-    public Task<ManaCost> ParseMana(string cost) => _restService.GetAsync<ManaCost>("/symbology/parse-mana");
+    ///<inheritdoc cref="ISymbology"/>
+    public Task<ParsedManaCost?> ParseMana(string cost) => _restService.GetAsync<ParsedManaCost>($"/symbology/parse-mana?cost={cost}");
 }
