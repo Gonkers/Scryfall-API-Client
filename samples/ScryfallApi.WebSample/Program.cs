@@ -17,10 +17,10 @@ services.AddScryfallApiClient();
 */
 
 // Example of customizing settings with code
-builder.Services.AddScryfallApiClient(config =>
+builder.Services.AddScryfallApiClient(new ScryfallApiClientConfig
 {
-    config.CacheDuration = TimeSpan.FromMinutes(30);
-    config.UseSlidingCacheExpiration = true;
+    CacheDuration = TimeSpan.FromMinutes(30),
+    UseSlidingCacheExpiration = true
 });
 
 var app = builder.Build();

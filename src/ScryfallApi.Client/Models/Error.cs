@@ -2,25 +2,30 @@
 
 namespace ScryfallApi.Client.Models;
 
+/// <summary>
+/// An Error object represents a failure to find information or understand the input
+/// you provided to the API. Error objects are always transmitted with the appropriate
+/// 4XX or 5XX HTTP status code.
+/// </summary>
 public class Error : BaseItem
 {
     /// <summary>
     /// An integer HTTP status code for this error.
     /// </summary>
     [JsonPropertyName("status")]
-    public int Status { get; set; }
+    public int Status { get; init; }
 
     /// <summary>
     /// A computer-friendly string representing the appropriate HTTP status code.
     /// </summary>
     [JsonPropertyName("code")]
-    public string Code { get; set; }
+    public string Code { get; init; } = string.Empty;
 
     /// <summary>
     /// A human-readable string explaining the error.
     /// </summary>
     [JsonPropertyName("details")]
-    public string Details { get; set; }
+    public string Details { get; init; } = string.Empty;
 
     /// <summary>
     /// A computer-friendly string that provides additional context for the main error. For
@@ -28,12 +33,12 @@ public class Error : BaseItem
     /// field will provide a label for the specific kind of 404 failure, such as ambiguous.
     /// </summary>
     [JsonPropertyName("type")]
-    public string Type { get; set; }
+    public string Type { get; init; } = string.Empty;
 
     /// <summary>
     /// If your input also generated non-failure warnings, they will be provided as
     /// human-readable strings in this array.
     /// </summary>
     [JsonPropertyName("warnings")]
-    public string[] Warnings { get; set; }
+    public IReadOnlyCollection<string> Warnings { get; init; } = [];
 }

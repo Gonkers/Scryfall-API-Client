@@ -1,5 +1,3 @@
-using System;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ScryfallApi.Client;
@@ -12,10 +10,10 @@ namespace ScryfallApi.WebSample.Pages
         ScryfallApiClient _scryfallApi { get; }
 
         [BindProperty]
-        public ResultList<Card> Results { get; set; }
+        public ResultList<Card>? Results { get; set; }
 
         [BindProperty]
-        public string Query { get; set; }
+        public string Query { get; set; } = string.Empty;
 
         public SearchModel(ScryfallApiClient scryfallApi)
         {
@@ -30,11 +28,12 @@ namespace ScryfallApi.WebSample.Pages
         {
             var options = new SearchOptions
             {
+                Page = 1,
                 Sort = SearchOptions.CardSort.Cmc,
                 Direction = SearchOptions.SortDirection.Desc
             };
 
-            Results = await _scryfallApi.Cards.Search(Query, 1, options);
+            Results = await _scryfallApi.Cards.Search(Query, options);
 
             return Page();
         }
